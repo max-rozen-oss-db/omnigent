@@ -356,6 +356,11 @@ export interface ServerInfo {
    * absent on older servers (off).
    */
   scheduled_task_sharing?: boolean;
+  /**
+   * Automations shared with the viewer can be listed (``/v1/scheduled-tasks/shared``);
+   * absent on older servers (off), including some that advertise sharing.
+   */
+  scheduled_task_shared_with_me?: boolean;
   /** Scheduled permissions support native harnesses beyond Claude Code. */
   scheduled_task_harness_settings?: boolean;
   /** Automations accept modes that skip approval; older servers may reject them. */
@@ -713,6 +718,7 @@ export async function resolveServerInfo(): Promise<ServerInfo> {
           scheduled_task_projects: data.scheduled_task_projects === true,
           scheduled_task_inbox: data.scheduled_task_inbox === true,
           scheduled_task_sharing: data.scheduled_task_sharing === true,
+          scheduled_task_shared_with_me: data.scheduled_task_shared_with_me === true,
           scheduled_task_harness_settings: data.scheduled_task_harness_settings === true,
           scheduled_task_approval_skipping_modes:
             data.scheduled_task_approval_skipping_modes === true,
